@@ -1,0 +1,20 @@
+const express=require("express")
+const cors=require("cors")
+const bodyparser=require("body-parser")
+const path=require('path')
+// global.app=express();
+const app=express()
+module.exports=app
+app.use(cors())
+app.use(bodyparser.json())
+app.set('view engine','ejs')
+app.set('views',path.join(__dirname,'views'))
+require('dotenv').config()
+require("./database/datasource")
+require("./models/user.model")
+require("./models/otp.model")
+require("./router/userouter")
+require("./router/otprouter")
+app.listen(2000,()=>{
+    console.log("server connected")
+})
